@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">RE/MAX_CRM</string>
+    <string name="title_activity_auth">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="autenticacao">AUTENTICAÇÃO</string>
+    <string name="log_in">Log In</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">ADMIN REMAX CRM</string>
+    <string name="nav_header_subtitle">admin@remax4uteampedrosantos.pt</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">LOG OUT</string>
+
+    <string name="menu_home">Agenda</string>
+    <string name="menu_gallery">Contactos</string>
+    <string name="menu_slideshow">Progressos</string>
+    <string name="menu_tools">Ferramentas</string>
+    <string name="menu_share">Partilhar Resultados</string>
+    <string name="menu_send">Enviar Objetivos Semanais</string>
+    <string name="communicate">Comunicação</string>
+    <string name="registar">REGISTAR</string>
+    <string name="Regi_subtitle">Crie a sua conta AGENTE REMAX</string>
+    <string name="Regi_Title">Registar</string>
+    <string name="Regi_nameText">Nome</string>
+    <string name="Regi_emailText">E-Mail</string>
+    <string name="Regi_passText">Password</string>
+    <string name="Regi_confirmPassText">Confirma Password</string>
+    <string name="feed_do_agente">Feed do Agente</string>
+</resources>

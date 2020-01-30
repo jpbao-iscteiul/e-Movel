@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "782598501520",
+    "firebase_url": "https://remax-fa646.firebaseio.com",
+    "project_id": "remax-fa646",
+    "storage_bucket": "remax-fa646.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782598501520:android:d7d15639920fe3bd949415",
+        "android_client_info": {
+          "package_name": "com.example.mycrm_teste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782598501520-oqnhnondh6lm0nl87ktogv139e9h69ak.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mycrm_teste",
+            "certificate_hash": "92c319372e71240700ed20f4f5c56ee4257de9b9"
+          }
+        },
+        {
+          "client_id": "782598501520-fpde58qn619d275fafmcp0hupimq9200.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfXEYlPi50eJT9jRY4mzL98qeglizT1BA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782598501520-fpde58qn619d275fafmcp0hupimq9200.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

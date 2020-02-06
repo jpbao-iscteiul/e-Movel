@@ -17,7 +17,6 @@
         <activity android:name=".Ferramentas" />
         <activity android:name=".Contactos" />
         <activity android:name=".Dashboards" />
-        <activity android:name=".Agenda" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

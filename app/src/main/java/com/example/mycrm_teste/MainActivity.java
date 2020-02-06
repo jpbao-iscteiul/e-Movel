@@ -1,10 +1,15 @@
 package com.example.mycrm_teste;
 
+import android.content.ComponentName;
+import android.content.ContentUris;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.KeyEventDispatcher;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,6 +23,8 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_agenda) {
-            startActivity(new Intent(getApplicationContext(), Agenda.class));
+           readCalendar();
         } else if (id == R.id.nav_contacts) {
             startActivity(new Intent(getApplicationContext(), Contactos.class));
         } else if (id == R.id.nav_dashboard) {
@@ -115,5 +122,13 @@ public class MainActivity extends AppCompatActivity
         FirebaseAuth.getInstance().signOut();
         startActivity( new Intent(getApplicationContext(), auth_main.class));
         finish();
+    }
+
+    public void readCalendar (){
+        Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+        builder.appendPath("time");
+        ContentUris.appendId(builder, Calendar.getInstance().getTime().getTime());
+        Intent intent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
+        startActivity(intent);
     }
 }

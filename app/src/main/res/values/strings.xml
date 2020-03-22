@@ -34,4 +34,6 @@
     <string name="Regi_passText">Password</string>
     <string name="Regi_confirmPassText">Confirma Password</string>
     <string name="feed_do_agente">Feed do Agente</string>
+    <string name="new_client_buuton">New Client</string>
+    <string name="contact_filter_search">Search</string>
 </resources>

@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_agenda) {
            readCalendar();
         } else if (id == R.id.nav_contacts) {
-            startActivity(new Intent(getApplicationContext(), Contactos.class));
+            startActivity(new Intent(getApplicationContext(), Contacts.class));
         } else if (id == R.id.nav_dashboard) {
             startActivity(new Intent(getApplicationContext(), Dashboards.class));
         } else if (id == R.id.nav_tools) {

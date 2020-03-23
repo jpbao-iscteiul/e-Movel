@@ -28,7 +28,6 @@ public class ClientDetailsActivity extends AppCompatActivity {
     private ClientClass client;
 
     private String key;
-    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +37,14 @@ public class ClientDetailsActivity extends AppCompatActivity {
         ClientClass cliente = intent.getParcelableExtra(Contacts.EXTRA_TEXT);
 
       //  key = getIntent().getStringExtra("clientKey");
-        Log.d("Testemunho", "onClick: Client Details recieve  - " + cliente);
+        Log.d("Testemunho", "onClick: Client Details recieve  - " + cliente.getName());
 
         mClienteName = findViewById(R.id.client_name);
-        mClienteName.setText(name);
+        mClienteName.setText(cliente.getName());
         mClienteMail = findViewById(R.id.client_mail);
+        mClienteMail.setText(cliente.getEmail());
         mClientePhone = findViewById(R.id.client_phone);
+        mClientePhone.setText(cliente.getPhone());
         mClienteLocation = findViewById(R.id.client_location);
 
         mClienteHuseType = findViewById(R.id.client_housetype);

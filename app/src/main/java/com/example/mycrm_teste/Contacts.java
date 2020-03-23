@@ -23,7 +23,7 @@ import java.util.List;
 
 public class Contacts extends AppCompatActivity {
 
-    public static final String EXTRA_TEXT = "com.example.mycrm.test.EXTRA_TEXT";
+    public static final String EXTRA_TEXT = "TAG_CONTACT";
 
     public static final int REQUEST_CALL = 1;
 
@@ -103,7 +103,7 @@ public class Contacts extends AppCompatActivity {
         intent.putExtra(EXTRA_TEXT, client);
         //intent.putExtra("clientKey", clientKeys.get(position));
         Log.d("Testemunho", "clickItem: Contact send " + client.getName());
-        startActivity(new Intent(Contacts.this, ClientDetailsActivity.class));
+        startActivity(intent);
 
     }
 

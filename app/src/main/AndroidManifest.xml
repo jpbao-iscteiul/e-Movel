@@ -17,10 +17,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ClientDetailsActivity" />
         <activity android:name=".AddClient" />
-        <activity
-            android:name=".Contacts"
-            android:label=".Contacts"
-            android:theme="@style/AppTheme"/>
+        <activity android:name=".Contacts" />
         <activity android:name=".Ferramentas" />
         <activity android:name=".Dashboards" />
         <activity

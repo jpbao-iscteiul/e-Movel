@@ -81,7 +81,7 @@
             android:layout_marginRight="5dp"
             android:layout_toStartOf="@+id/notifications"
             android:layout_toLeftOf="@+id/notifications"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:src="@drawable/ic_star_black_24dp" />
         <ImageView
             android:id="@+id/favorite"

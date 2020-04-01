@@ -3,8 +3,9 @@ package com.example.mycrm_teste;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ClientClass implements Parcelable {
+public class ClientClass implements Parcelable, Comparable <ClientClass>{
 
+    private String id;
     private int fav;
     private String email;
     private String name;
@@ -16,7 +17,9 @@ public class ClientClass implements Parcelable {
 
     }
 
-    public ClientClass(int fav, String email, String name, String phone, String obs) {
+    public ClientClass(String id, int fav, String email, String name, String phone, String obs) {
+
+        this.id=id;
         this.fav = fav;
         this.email = email;
         this.name = name;
@@ -25,6 +28,7 @@ public class ClientClass implements Parcelable {
     }
 
     protected ClientClass(Parcel in) {
+        id = in.readString();
         fav = in.readInt();
         email = in.readString();
         name = in.readString();
@@ -50,6 +54,14 @@ public class ClientClass implements Parcelable {
 
     public void setFav(int fav) {
         this.fav = fav;
+    }
+
+    public String  getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -91,6 +103,7 @@ public class ClientClass implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
         dest.writeInt(fav);
         dest.writeString(email);
         dest.writeString(name);
@@ -98,11 +111,8 @@ public class ClientClass implements Parcelable {
         dest.writeString(obs);
     }
 
-    public Boolean isFavorite (int fav){
-        if (fav == 1){
-            return true;
-        } else {
-            return false;
-        }
+    @Override
+    public int compareTo(ClientClass o) {
+        return o.getFav() - this.getFav();
     }
 }

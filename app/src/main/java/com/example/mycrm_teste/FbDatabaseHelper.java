@@ -1,20 +1,17 @@
 package com.example.mycrm_teste;
 
-import android.provider.ContactsContract;
 import android.util.Log;
-import android.util.LogPrinter;
-
 import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
 
 public class FbDatabaseHelper {
 
@@ -22,6 +19,8 @@ public class FbDatabaseHelper {
     private DatabaseReference mReference;
 
     private ArrayList <ClientClass> listaClientes = new ArrayList<>();
+
+
 
     public interface DataStatus{
         void DataIsLoaded(List<ClientClass> clients, List<String> keys);
@@ -36,6 +35,7 @@ public class FbDatabaseHelper {
     }
 
     public void readClients(final DataStatus dataStatus){
+
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -43,11 +43,12 @@ public class FbDatabaseHelper {
                 ArrayList<String> keys = new ArrayList<>();
                 for(DataSnapshot keyNode : dataSnapshot.getChildren()){
                     keys.add(keyNode.getKey());
-                    Log.d("Name1", "onBindViewHolder: " + keyNode.getValue().toString());
                     ClientClass client = keyNode.getValue(ClientClass.class);
-                    Log.d("Name1", "onDataChange AFTER UPDATE: " + client.getPhone() + " " + client.getName() + " " + client.getObs() + " " + client.getEmail());
+                    client.setId(keyNode.getKey());
+                    Log.d("Client", "onDataChange: ID " + client.getId());
                     listaClientes.add(client);
                 }
+                Collections.sort(listaClientes);
                 dataStatus.DataIsLoaded(listaClientes, keys);
             }
             @Override

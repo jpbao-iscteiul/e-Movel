@@ -25,16 +25,13 @@ public class ClientDetailsActivity extends AppCompatActivity {
     private Button mUpdateClienteButton;
     private Button mDeleteClienteButton;
 
-    private ClientClass client;
-
-    private String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_details);
         Intent intent = getIntent();
-        ClientClass cliente = intent.getParcelableExtra(Contacts.EXTRA_TEXT);
+        final ClientClass cliente = intent.getParcelableExtra(Contacts.EXTRA_TEXT);
 
       //  key = getIntent().getStringExtra("clientKey");
         Log.d("Testemunho", "onClick: Client Details recieve  - " + cliente.getName());
@@ -46,50 +43,43 @@ public class ClientDetailsActivity extends AppCompatActivity {
         mClientePhone = findViewById(R.id.client_phone);
         mClientePhone.setText(cliente.getPhone());
         mClienteLocation = findViewById(R.id.client_location);
-
         mClienteHuseType = findViewById(R.id.client_housetype);
-
         mUpdateClienteButton = findViewById(R.id.updateClientButton);
         mDeleteClienteButton = findViewById(R.id.deleteClientButton);
 
         mUpdateClienteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClientClass client = new ClientClass();
-                client.setName(mClienteName.getText().toString());
-                client.setPhone(mClientePhone.getText().toString());
-                client.setEmail(mClienteMail.getText().toString());
-                client.setObs(mClienteHuseType.getSelectedItem().toString() + " " + mClienteLocation.getText().toString());
+                ClientClass newClient = new ClientClass();
+                newClient.setName(mClienteName.getText().toString());
+                newClient.setPhone(mClientePhone.getText().toString());
+                newClient.setEmail(mClienteMail.getText().toString());
+                newClient.setObs(mClienteHuseType.getSelectedItem().toString() + " " + mClienteLocation.getText().toString());
+                newClient.setId(cliente.getId());
 
-                new FbDatabaseHelper().updateClient(key, client, new FbDatabaseHelper.DataStatus() {
+                new FbDatabaseHelper().updateClient(newClient.getId(), newClient, new FbDatabaseHelper.DataStatus() {
                     @Override
                     public void DataIsLoaded(List<ClientClass> clients, List<String> keys) {
-
                     }
-
                     @Override
                     public void DataIsInserted() {
-
                     }
-
                     @Override
                     public void DataIsUpdated() {
-                        Toast.makeText(ClientDetailsActivity.this, "Updated!", Toast.LENGTH_LONG);
+                        Toast.makeText(ClientDetailsActivity.this, "Updated!", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
-
                     @Override
                     public void DataIsDeleted() {
-
                     }
                 });
             }
         });
 
-
         mDeleteClienteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new FbDatabaseHelper().deleteClient(key, new FbDatabaseHelper.DataStatus() {
+                new FbDatabaseHelper().deleteClient(cliente.getId(), new FbDatabaseHelper.DataStatus() {
                     @Override
                     public void DataIsLoaded(List<ClientClass> clients, List<String> keys) {
                     }
@@ -102,7 +92,7 @@ public class ClientDetailsActivity extends AppCompatActivity {
 
                     @Override
                     public void DataIsDeleted() {
-                        Toast.makeText(ClientDetailsActivity.this, "Deleted", Toast.LENGTH_LONG);
+                        Toast.makeText(ClientDetailsActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

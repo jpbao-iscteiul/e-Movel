@@ -18,6 +18,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.api.Api;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,11 +49,6 @@ public class Contacts extends AppCompatActivity {
         createContactList();
         setButtons();
     }
-
-    //private void insertContact(int position){
-    //contactList.add( new TemplateContactCard(R.drawable.ic_person_outline_black_24dp, "New Client", "Info_NewClient"));
-    // mAdapter.notifyItemInserted(position);
-    //}
 
     private void removeContact(int position) {
         /*if(position < contactList.size() && position > 0) {
@@ -81,18 +79,52 @@ public class Contacts extends AppCompatActivity {
             @Override
             public void onFavPressedClick(int position) {
                 final ClientClass client = listOfClients.get(position).getCliente();
-                int fav = client.getFav();
-                client.setFav(fav--);
+                client.setFav(0);
+                new FbDatabaseHelper().updateClient(client.getId(), client, new FbDatabaseHelper.DataStatus() {
+                    @Override
+                    public void DataIsLoaded(List<ClientClass> clients, List<String> keys) {
 
+                    }
+                    @Override
+                    public void DataIsInserted() {
+
+                    }
+                    @Override
+                    public void DataIsUpdated() {
+                        Toast.makeText(Contacts.this, "Client Removed to Favorites", Toast.LENGTH_SHORT).show();
+                        Log.d("ClientA", "DataIsUpdated: TAG " + client.getFav());
+                    }
+                    @Override
+                    public void DataIsDeleted() {
+
+                    }
+                });
             }
-
             @Override
             public void onFavClick(int position) {
                 final ClientClass client = listOfClients.get(position).getCliente();
-                int fav = client.getFav();
-                client.setFav(fav++);
-            }
+                Log.d("ClientB", "DataIsUpdated: TAG " + client.getFav());
+                client.setFav(1);
+                new FbDatabaseHelper().updateClient(client.getId(), client, new FbDatabaseHelper.DataStatus() {
+                    @Override
+                    public void DataIsLoaded(List<ClientClass> clients, List<String> keys) {
 
+                    }
+                    @Override
+                    public void DataIsInserted() {
+
+                    }
+                    @Override
+                    public void DataIsUpdated() {
+                        Toast.makeText(Contacts.this, "Client Added to Favorites", Toast.LENGTH_SHORT).show();
+                        Log.d("ClientA", "DataIsUpdated: TAG " + client.getFav());
+                    }
+                    @Override
+                    public void DataIsDeleted() {
+
+                    }
+                });
+            }
         });
 
     }
@@ -101,8 +133,6 @@ public class Contacts extends AppCompatActivity {
         Intent intent = new Intent(Contacts.this, ClientDetailsActivity.class);
         ClientClass client = listOfClients.get(position).getCliente();
         intent.putExtra(EXTRA_TEXT, client);
-        //intent.putExtra("clientKey", clientKeys.get(position));
-        Log.d("Testemunho", "clickItem: Contact send " + client.getName());
         startActivity(intent);
 
     }
@@ -144,7 +174,6 @@ public class Contacts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addContact();
-                //insertContact(0);
             }
         });
 
@@ -193,7 +222,6 @@ public class Contacts extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d("Ch", "onCreateOptionsMenu: CHEGUEI");
         getMenuInflater().inflate(R.menu.contact_filter, menu);
-
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

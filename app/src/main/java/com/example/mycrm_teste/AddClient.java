@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.Script;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,8 +21,6 @@ public class AddClient extends AppCompatActivity {
     private EditText mClientePhone;
     private EditText mClienteLocation;
     private Spinner mClienteHuseType;
-    private Button mAddClienteButton;
-
 
 
     @Override
@@ -36,13 +35,13 @@ public class AddClient extends AppCompatActivity {
 
         mClienteHuseType = findViewById(R.id.addClient_housetype);
 
-        mAddClienteButton = findViewById(R.id.addClientButton);
+        Button mAddClienteButton = findViewById(R.id.addClientButton);
 
 
         mAddClienteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               ClientClass cliente = createClient();
+               final ClientClass cliente = createClient();
 
                new FbDatabaseHelper().addClient(cliente, new FbDatabaseHelper.DataStatus() {
                    @Override
@@ -52,7 +51,8 @@ public class AddClient extends AppCompatActivity {
 
                    @Override
                    public void DataIsInserted() {
-                       Toast.makeText(AddClient.this, "New Client has been inserted", Toast.LENGTH_LONG).show();
+                       Toast.makeText(AddClient.this, "New Client has been inserted", Toast.LENGTH_SHORT).show();
+
                        finish();
                    }
 

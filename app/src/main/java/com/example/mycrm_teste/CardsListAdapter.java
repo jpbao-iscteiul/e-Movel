@@ -46,19 +46,13 @@ public class CardsListAdapter extends RecyclerView.Adapter <CardsListAdapter.Exa
         private ImageView contactPhoto;
         private TextView contactName;
         private TextView eMail;
-
         private ImageView mCallImage;
-
         private ImageView mNotifications;
-
         private ImageView mFavorites;
         private ImageView mFavPressed;
 
 
-        private Context mContext;
-        private String key;
-
-        public ExampleViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+        public ExampleViewHolder(@NonNull View itemView, final OnItemClickListener listener, List <TemplateContactCard> contactList) {
             super(itemView);
             contactPhoto = itemView.findViewById(R.id.contactPhoto);
             contactName = itemView.findViewById(R.id.name);
@@ -68,6 +62,16 @@ public class CardsListAdapter extends RecyclerView.Adapter <CardsListAdapter.Exa
             mFavorites = itemView.findViewById(R.id.favorite);
             mFavPressed = itemView.findViewById(R.id.favorite_checked);
 
+            for (int i=0; i<contactList.size(); i++){
+                if(contactList.get(i).getCliente().getFav() == 1){
+                    mFavPressed.setVisibility(View.VISIBLE);
+                    mFavorites.setVisibility(View.GONE);
+                }
+                else {
+                    mFavPressed.setVisibility(View.GONE);
+                    mFavorites.setVisibility(View.VISIBLE);
+                }
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,10 +82,6 @@ public class CardsListAdapter extends RecyclerView.Adapter <CardsListAdapter.Exa
                             listener.onItemClick(pos);
                         }
                     }
-                    /*Intent intent = new Intent (mContext , ClientDetailsActivity.class);
-                    intent.putExtra("key", key);
-                    intent.putExtra("name", contactName.getText().toString());
-                    mContext.startActivity(intent); */
                 }
             });
 
@@ -103,10 +103,10 @@ public class CardsListAdapter extends RecyclerView.Adapter <CardsListAdapter.Exa
                    if (listener != null){
                        int pos = getAdapterPosition();
                        if (pos != RecyclerView.NO_POSITION){
-                           if(mFavorites.getVisibility() == View.VISIBLE && mFavPressed.getVisibility() == View.INVISIBLE){
-                               mFavorites.setVisibility(View.INVISIBLE);
+                           listener.onFavClick(pos);
+                           if(mFavorites.getVisibility() == View.VISIBLE){
+                               mFavorites.setVisibility(View.GONE);
                                mFavPressed.setVisibility(View.VISIBLE);
-                               listener.onFavClick(pos);
                            }
                        }
                    }
@@ -118,10 +118,12 @@ public class CardsListAdapter extends RecyclerView.Adapter <CardsListAdapter.Exa
                public void onClick(View v) {
                    if (listener != null) {
                        int pos = getAdapterPosition();
-                       if (mFavPressed.getVisibility() == View.VISIBLE && mFavorites.getVisibility() == View.INVISIBLE) {
-                           mFavPressed.setVisibility(View.INVISIBLE);
-                           mFavorites.setVisibility(View.VISIBLE);
-                           listener.onFavPressedClick(pos);
+                       if (pos != RecyclerView.NO_POSITION){
+                           if (mFavPressed.getVisibility() == View.VISIBLE) {
+                               mFavPressed.setVisibility(View.GONE);
+                               mFavorites.setVisibility(View.VISIBLE);
+                               listener.onFavPressedClick(pos);
+                           }
                        }
                    }
                }
@@ -140,7 +142,7 @@ public class CardsListAdapter extends RecyclerView.Adapter <CardsListAdapter.Exa
     @Override
     public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.template_contact_item, parent, false);
-        ExampleViewHolder evh = new ExampleViewHolder(v, mListener);
+        ExampleViewHolder evh = new ExampleViewHolder(v, mListener, contactList);
         return evh;
     }
 
